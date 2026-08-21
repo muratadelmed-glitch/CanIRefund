@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://can-i-refund.vercel.app/sitemap.xml
