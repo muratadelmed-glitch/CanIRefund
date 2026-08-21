@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="CanIRefund? helps shoppers understand return windows, conditions, and policy requirements." />
+  <title>CanIRefund? - Free Return Eligibility Checker</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="#top" aria-label="CanIRefund home">CanIRefund<span>?</span></a>
+      <nav aria-label="Primary navigation">
+        <a href="#checker">Checker</a>
+        <a href="#how">How it works</a>
+        <a href="#stores">Stores</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <a class="button button-small" href="#checker">Check a return</a>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <div class="eyebrow">Free return eligibility checker</div>
+          <h1>Can You Still <span>Return It?</span></h1>
+          <p class="hero-lede">Find out in seconds. Get exact return deadlines, refund conditions, and official policy proof for major US retailers.</p>
+          <div class="hero-actions">
+            <a class="button" href="#checker">Start checking</a>
+            <a class="button button-ghost" href="#how">How it works</a>
+          </div>
+          <div class="trust-row" aria-label="Key benefits">
+            <span>✓ No sign-up</span><span>✓ Free to use</span><span>✓ Policy-focused</span>
+          </div>
+        </div>
+        <aside class="hero-card" aria-label="Return checker preview">
+          <div class="mini-progress"><span class="active">1</span><span>2</span><span>3</span><span>4</span><span>5</span></div>
+          <div class="mini-labels"><span>Store</span><span>Category</span><span>Date</span><span>Condition</span><span>Result</span></div>
+          <div class="preview-box">
+            <div class="preview-kicker">Select a store</div>
+            <div class="preview-list"><span>📦 Amazon</span><span>🎯 Target</span><span>🍎 Apple</span><span>🔨 Home Depot</span></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section checker-section" id="checker">
+      <div class="container narrow">
+        <div class="section-heading center">
+          <div class="eyebrow">Return checker</div>
+          <h2>Check your return</h2>
+          <p>This rebuild preserves the public CanIRefund interface while keeping policy logic isolated in a data file so it can be verified and updated safely.</p>
+        </div>
+
+        <div class="checker-card">
+          <div class="progress" aria-label="Checker progress">
+            <button class="step-dot current" data-step-target="1" type="button"><b>1</b><span>Store</span></button>
+            <button class="step-dot" data-step-target="2" type="button"><b>2</b><span>Category</span></button>
+            <button class="step-dot" data-step-target="3" type="button"><b>3</b><span>Date</span></button>
+            <button class="step-dot" data-step-target="4" type="button"><b>4</b><span>Condition</span></button>
+            <button class="step-dot" data-step-target="5" type="button"><b>5</b><span>Result</span></button>
+          </div>
+
+          <form id="refundForm" novalidate>
+            <section class="form-step active" data-step="1">
+              <h3>Select a Store</h3>
+              <p class="muted">Choose one of the retailers shown on the original public page.</p>
+              <div class="store-grid" id="storeGrid"></div>
+              <p class="field-error" id="storeError" hidden>Please select a store.</p>
+            </section>
+
+            <section class="form-step" data-step="2">
+              <h3>Select a Category</h3>
+              <label for="category">Product category</label>
+              <select id="category" name="category">
+                <option value="">Choose a category</option>
+                <option>Electronics</option>
+                <option>Clothing & footwear</option>
+                <option>Beauty & personal care</option>
+                <option>Home & tools</option>
+                <option>General merchandise</option>
+                <option>Other</option>
+              </select>
+            </section>
+
+            <section class="form-step" data-step="3">
+              <h3>Enter Delivery Date</h3>
+              <label for="deliveryDate">When did the item arrive?</label>
+              <input id="deliveryDate" name="deliveryDate" type="date" />
+              <p class="muted">The original site says this date is used to calculate the return deadline.</p>
+            </section>
+
+            <section class="form-step" data-step="4">
+              <h3>Item Condition</h3>
+              <fieldset>
+                <legend>What condition is the item in?</legend>
+                <div class="choice-list">
+                  <label><input type="radio" name="condition" value="unopened" /> Unopened</label>
+                  <label><input type="radio" name="condition" value="opened" /> Opened</label>
+                  <label><input type="radio" name="condition" value="defective" /> Defective</label>
+                  <label><input type="radio" name="condition" value="wrong-item" /> Wrong item</label>
+                </div>
+              </fieldset>
+            </section>
+
+            <section class="form-step" data-step="5">
+              <div class="result-placeholder" id="resultPanel">
+                <div class="result-icon">✓</div>
+                <h3>Ready for verified policy data</h3>
+                <p>The B12 public page exposes the interface and marketing content, but not its private policy database or application logic. This rebuild therefore does <strong>not</strong> invent eligibility results.</p>
+                <dl class="summary" id="summary"></dl>
+                <p class="muted small">Next development step: connect verified retailer/category policy records in <code>data/policies.json</code>, then enable deadline calculations.</p>
+              </div>
+            </section>
+
+            <div class="form-actions">
+              <button class="button button-ghost" id="backBtn" type="button" hidden>Back</button>
+              <button class="button" id="nextBtn" type="button">Continue</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt" id="how">
+      <div class="container">
+        <div class="section-heading center">
+          <div class="eyebrow">How it works</div>
+          <h2>Get your return eligibility result in 4 simple steps</h2>
+        </div>
+        <div class="feature-grid three">
+          <article class="feature-card"><div class="num">1</div><h3>Select Store &amp; Category</h3><p>Choose from 10 major US retailers and select your product category for accurate policy details.</p></article>
+          <article class="feature-card"><div class="num">2</div><h3>Enter Delivery Date</h3><p>Tell us when your item arrived so we can calculate your exact return deadline.</p></article>
+          <article class="feature-card"><div class="num">3</div><h3>Get Instant Results</h3><p>See if you can still return it, days remaining, conditions, and official policy proof.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="stores">
+      <div class="container">
+        <div class="section-heading center">
+          <div class="eyebrow">Supported stores</div>
+          <h2>Major US retailers</h2>
+          <p>Stores shown on the current public CanIRefund page.</p>
+        </div>
+        <div class="supported-grid" id="supportedGrid"></div>
+        <div class="public-policy-note">
+          <strong>Visible on the current public page:</strong> Best Buy — 15-day returns; Home Depot — 30-day returns. Category/member exceptions may apply, so these values are intentionally not used for automatic eligibility until source verification is added.
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt" id="why">
+      <div class="container">
+        <div class="section-heading center">
+          <div class="eyebrow">Why CanIRefund?</div>
+          <h2>Stop guessing. Get the facts.</h2>
+        </div>
+        <div class="feature-grid">
+          <article class="feature-card"><h3>Exact Deadlines</h3><p>Know the precise date your return window closes, calculated from your actual delivery date.</p></article>
+          <article class="feature-card"><h3>Official Policy Proof</h3><p>Every result links directly to the retailer's official return policy with verification dates.</p></article>
+          <article class="feature-card"><h3>Condition-Specific</h3><p>Get results based on your item's actual condition—unopened, opened, defective, or wrong item.</p></article>
+          <article class="feature-card"><h3>Category Details</h3><p>Different categories have different rules. We account for electronics, clothing, home goods, and more.</p></article>
+          <article class="feature-card"><h3>Exceptions &amp; Notes</h3><p>See important exceptions, receipt requirements, return shipping details, and special conditions.</p></article>
+          <article class="feature-card"><h3>100% Free</h3><p>No sign-up required. No hidden fees. Just accurate return policy information when you need it.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="faq">
+      <div class="container narrow">
+        <div class="section-heading center">
+          <div class="eyebrow">FAQ</div>
+          <h2>Frequently Asked Questions</h2>
+          <p>Common questions about return policies and the checker.</p>
+        </div>
+        <div class="faq-list">
+          <details open><summary>How accurate is CanIRefund?</summary><p>We verify all return policies directly from official retailer sources and update them regularly. Each policy shows the last verification date so you know the information is current.</p></details>
+          <details><summary>Is this service really free?</summary><p>Yes! CanIRefund is completely free to use. We believe shoppers deserve clear, accurate information about return policies without any cost.</p></details>
+          <details><summary>What if my item is past the return deadline?</summary><p>Some retailers offer exceptions for defective items or have extended return windows for loyalty members. Always check the official policy or contact customer service directly.</p></details>
+          <details><summary>Do I need a receipt to return an item?</summary><p>Most retailers require proof of purchase, but policies vary. Our checker shows receipt requirements for each store and category.</p></details>
+          <details><summary>Can I return opened items?</summary><p>It depends on the retailer and product category. Some stores accept opened items within the return window, while others require items to be sealed. Our checker accounts for item condition.</p></details>
+          <details><summary>Who pays for return shipping?</summary><p>Return shipping policies vary by retailer. Most major stores offer free return shipping for eligible items, but some may charge restocking fees or require you to pay for shipping.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="container cta-inner">
+        <div><div class="eyebrow light">Ready to check?</div><h2>Ready to Check Your Return?</h2><p>Find out if you can still return your item in just a few clicks.</p></div>
+        <a class="button button-light" href="#checker">Check a return</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div><a class="brand footer-brand" href="#top">CanIRefund<span>?</span></a><p>Return-policy guidance made easier to understand.</p></div>
+      <p class="footer-note">Independent rebuild of the public B12 page. Retailer policies can change; verify against official retailer sources before relying on a result.</p>
+    </div>
+  </footer>
+</body>
+</html>

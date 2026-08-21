@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "status": "needs-source-verification",
+  "note": "The public B12 page did not expose a machine-readable policy database. Do not invent eligibility rules. Add verified official retailer sources, category exceptions, membership rules, condition rules, source URLs, and verification timestamps before enabling automatic results.",
+  "stores": [
+    {"id":"amazon","name":"Amazon","policies":[]},
+    {"id":"walmart","name":"Walmart","policies":[]},
+    {"id":"target","name":"Target","policies":[]},
+    {"id":"best-buy","name":"Best Buy","publicPageGeneralWindowDays":15,"policies":[]},
+    {"id":"apple","name":"Apple","policies":[]},
+    {"id":"costco","name":"Costco","policies":[]},
+    {"id":"nike","name":"Nike","policies":[]},
+    {"id":"zara","name":"Zara","policies":[]},
+    {"id":"sephora","name":"Sephora","policies":[]},
+    {"id":"home-depot","name":"Home Depot","publicPageGeneralWindowDays":30,"policies":[]}
+  ]
+}
